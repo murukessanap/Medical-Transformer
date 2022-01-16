@@ -203,11 +203,12 @@ class Image2D(Dataset):
             torchvision.transforms.ToTensor will be used.
     """
 
-    def __init__(self, dataset_path: str, transform: Callable = None):
+    def __init__(self, dataset_path: str, transform: Callable = None, img_size):
 
         self.dataset_path = dataset_path
         self.input_path = os.path.join(dataset_path, 'img')
-        self.images_list = os.listdir(self.input_path)
+        self.images_list = os.listdir(self.input_path)self.img_size = img_size
+        self.img_size = img_size
 
         if transform:
             self.transform = transform
@@ -222,6 +223,7 @@ class Image2D(Dataset):
         image_filename = self.images_list[idx]
 
         image = cv2.imread(os.path.join(self.input_path, image_filename))
+        image = cv2.resize(image, (self.img_size, self.img_size))
 
         # image = np.transpose(image,(2,0,1))
 
