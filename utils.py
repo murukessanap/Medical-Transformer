@@ -125,7 +125,7 @@ class ImageToImage2D(Dataset):
         one_hot_mask: bool, if True, returns the mask in one-hot encoded form.
     """
 
-    def __init__(self, dataset_path: str, joint_transform: Callable = None, one_hot_mask: int = False, img_size) -> None:
+    def __init__(self, img_size, dataset_path: str, joint_transform: Callable = None, one_hot_mask: int = False) -> None:
         self.dataset_path = dataset_path
         self.input_path = os.path.join(dataset_path, 'img')
         self.output_path = os.path.join(dataset_path, 'labelcol')
@@ -203,7 +203,7 @@ class Image2D(Dataset):
             torchvision.transforms.ToTensor will be used.
     """
 
-    def __init__(self, dataset_path: str, transform: Callable = None, img_size):
+    def __init__(self, img_size, dataset_path: str, transform: Callable = None):
 
         self.dataset_path = dataset_path
         self.input_path = os.path.join(dataset_path, 'img')
