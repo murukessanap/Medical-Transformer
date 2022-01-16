@@ -151,7 +151,7 @@ class ImageToImage2D(Dataset):
         image = cv2.imread(os.path.join(self.input_path, image_filename))
         # print(image.shape)
         # read mask image
-        mask = cv2.imread(os.path.join(self.output_path, image_filename[: -3] + "png"),0)
+        mask = cv2.imread(os.path.join(self.output_path, image_filename[: -4] + "_anno.bmp"),0)
         
         mask[mask<=127] = 0
         mask[mask>127] = 1
