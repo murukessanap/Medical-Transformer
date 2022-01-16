@@ -125,12 +125,13 @@ class ImageToImage2D(Dataset):
         one_hot_mask: bool, if True, returns the mask in one-hot encoded form.
     """
 
-    def __init__(self, dataset_path: str, joint_transform: Callable = None, one_hot_mask: int = False) -> None:
+    def __init__(self, dataset_path: str, joint_transform: Callable = None, one_hot_mask: int = False, img_size) -> None:
         self.dataset_path = dataset_path
         self.input_path = os.path.join(dataset_path, 'img')
         self.output_path = os.path.join(dataset_path, 'labelcol')
         self.images_list = os.listdir(self.input_path)
         self.one_hot_mask = one_hot_mask
+        self.img_size = img_size
 
         if joint_transform:
             self.joint_transform = joint_transform
@@ -149,13 +150,15 @@ class ImageToImage2D(Dataset):
         # print(os.path.join(self.output_path, image_filename[: -3] + "png"))
         # print(os.path.join(self.input_path, image_filename))
         image = cv2.imread(os.path.join(self.input_path, image_filename))
+        image = cv2.resize(image, (self.img_size, self.img_size))
         # print(image.shape)
         # read mask image
         mask = cv2.imread(os.path.join(self.output_path, image_filename[: -4] + "_anno.bmp"),0)
-        
+        mask = cv2.resize(mask, (self.img_size, self.img_size))
+        1050
         mask[mask<=127] = 0
         mask[mask>127] = 1
-        # correct dimensions if needed
+        # correct dimensions if neededimage
         image, mask = correct_dims(image, mask)
         # print(image.shape)
 
