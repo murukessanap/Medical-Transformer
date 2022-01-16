@@ -84,9 +84,9 @@ else:
 
 tf_train = JointTransform2D(crop=crop, p_flip=0.5, color_jitter_params=None, long_mask=True)
 tf_val = JointTransform2D(crop=crop, p_flip=0, color_jitter_params=None, long_mask=True)
-train_dataset = ImageToImage2D(args.train_dataset, tf_train)
-val_dataset = ImageToImage2D(args.val_dataset, tf_val)
-predict_dataset = Image2D(args.val_dataset)
+train_dataset = ImageToImage2D(args.train_dataset, tf_train, img_size=imgsize)
+val_dataset = ImageToImage2D(args.val_dataset, tf_val, img_size=imgsize)
+predict_dataset = Image2D(args.val_dataset, img_size=imgsize)
 dataloader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True)
 valloader = DataLoader(val_dataset, 1, shuffle=True)
 
