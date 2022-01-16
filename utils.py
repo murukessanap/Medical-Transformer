@@ -156,8 +156,9 @@ class ImageToImage2D(Dataset):
         mask = cv2.imread(os.path.join(self.output_path, image_filename[: -4] + "_anno.bmp"),0)
         mask = cv2.resize(mask, (self.img_size, self.img_size))
         1050
-        mask[mask<=127] = 0
-        mask[mask>127] = 1
+        #mask[mask==127] = 0
+        #mask[mask>127] = 1
+        mask[mask>0] = 1
         # correct dimensions if neededimage
         image, mask = correct_dims(image, mask)
         # print(image.shape)
