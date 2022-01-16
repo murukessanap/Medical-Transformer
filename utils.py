@@ -207,7 +207,7 @@ class Image2D(Dataset):
 
         self.dataset_path = dataset_path
         self.input_path = os.path.join(dataset_path, 'img')
-        self.images_list = os.listdir(self.input_path)self.img_size = img_size
+        self.images_list = os.listdir(self.input_path)
         self.img_size = img_size
 
         if transform:
